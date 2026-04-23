@@ -129,58 +129,58 @@ sudo dmesg | tail -n 5
 ## 3. Demo with Screenshots
 
 ### Screenshot 1 — Multi-Container Supervision
-![Multi-container supervision](Screenshots/screenshot1.png)
+![Multi-container supervision](Screenshots/Screenshot1.png)
 
 Two containers (alpha, beta) running simultaneously under one supervisor process. The supervisor was started once and manages both containers concurrently.
 
 ---
 
 ### Screenshot 2 — Metadata Tracking
-![Metadata tracking](Screenshots/screenshot2.png)
+![Metadata tracking](Screenshots/Screenshot2.png)
 
 Output of `engine ps` showing each container's ID, host PID, state, and configured soft/hard memory limits.
 
 ---
 
 ### Screenshot 3 — Bounded-Buffer Logging
-![Bounded-buffer logging](Screenshots/screenshot3.png)
+![Bounded-buffer logging](Screenshots/Screenshot3.png)
 
 Output of `engine logs alpha` showing container stdout/stderr captured through the producer-consumer logging pipeline and written to a per-container log file.
 
 ---
 
 ### Screenshot 4 — CLI and IPC
-![CLI and IPC](Screenshots/screenshot4.png)
+![CLI and IPC](Screenshots/Screenshot4.png)
 
 A `start` command issued via the CLI client, the supervisor responding over the UNIX domain socket, followed by `ps` confirming the container is tracked, and `stop` terminating it cleanly.
 
 ---
 
 ### Screenshot 5 — Soft-Limit Warning
-![Soft-limit warning](Screenshots/screenshot5.png)
+![Soft-limit warning](Screenshots/Screenshot5.png)
 
 `dmesg` output showing the kernel module detecting that container alpha's RSS exceeded its soft limit and logging a warning event.
 
 ---
 
 ### Screenshot 6 — Hard-Limit Enforcement
-![Hard-limit enforcement](Screenshots/screenshot6_1.png)
-![State-Killed](Screenshots/screenshot6_2.png)
+![Hard-limit enforcement](Screenshots/Screenshot6_1.png)
+![State-Killed](Screenshots/Screenshot6_2.png)
 
 `dmesg` output showing the kernel module sending SIGKILL to container alpha after its RSS exceeded the hard limit. `engine ps` confirms the container state changed to `killed`.
 
 ---
 
 ### Screenshot 7 — Scheduling Experiment
-![Scheduling experiment](Screenshots/screenshot7.png)
+![Scheduling experiment](Screenshots/Screenshot7.png)
 
 Two cpu_hog containers running with different nice values (nice=0 and nice=10). The nice=0 container (PR=20) receives higher CPU priority than the nice=10 container (PR=30), demonstrating Linux CFS scheduling behavior.
 
 ---
 
 ### Screenshot 8 — Clean Teardown
-![Stopping Containers](Screenshots/screenshot8_1.png)
-![Clean teardown](Screenshots/screenshot8_2.png)
+![Stopping Containers](Screenshots/Screenshot8_1.png)
+![Clean teardown](Screenshots/Screenshot8_2.png)
 
 All containers stopped, no zombie processes in `ps aux`, supervisor exits cleanly, and kernel module unloaded with `rmmod monitor`.
 
